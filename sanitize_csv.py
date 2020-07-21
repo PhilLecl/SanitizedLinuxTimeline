@@ -15,7 +15,8 @@ def read_distros():
     l = set()
     with open(listfile) as f:
         for line in f:
-            l.add(line.replace("\n", ""))
+            if line[0] != "#":
+                l.add(line.replace("\n", ""))
     return l
 
 
@@ -36,7 +37,35 @@ def remove_comments():
 
 
 def remove_unneeded_distros():
-    pass
+    global csvdata
+    for row in csvdata.copy():
+        if row[0] == "N" and row[1] not in distros and row[8] not in distros:
+            csvdata.remove(row)
+        elif row[0] != "N":
+            csvdata.remove(row)
+
+
+def print_csv():
+    for row in csvdata:
+        print(row)
+
+
+def check_existence():
+    for distro in distros:
+        found = False
+        for row in csvdata:
+            if row[0] == "N":
+                if row[1] == distro:
+                    found = True
+                    break
+            i = 8
+            while i < len(row):
+                if row[i] == distro:
+                    found = True
+                    break
+                i += 3
+        if not found:
+            print(distro + " not found in csv.")
 
 
 if __name__ == "__main__":

@@ -5,7 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def parse_args():
+def argparse():
     try:
         global number
         number = int(sys.argv[1])
@@ -42,5 +42,5 @@ def scrape():
 
 
 if __name__ == "__main__":
-    parse_args()
+    argparse()
     scrape()

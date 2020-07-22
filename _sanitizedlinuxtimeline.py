@@ -92,3 +92,59 @@ def add_ancestors(distro, distros, csvdata):
                 d = add_ancestors(row[3], d, csvdata)
                 break
     return d
+
+
+def remove_comments(csvfile):
+    """remove_comments(csvfile)
+    Reads csvfile and returns a list of all lines whose first element is not empty and doesn't begin with "//" or "#"
+
+    :param str csvfile: filename of the csv file
+
+    :return: a list containing all non-comment lines
+    """
+    with open(csvfile) as f:
+        _csvdata = list(csv.reader(f, delimiter=',', quotechar='"'))
+    csvdata = [row for row in _csvdata if row[0]
+               and not row[0].startswith("//") and not row[0].startswith("#")]
+    return csvdata
+
+
+def write_csv(filename, csvdata):
+    """write_csv(filename, csvdata)
+    Write the data in csvdata to a file called filename
+
+    :param str filename: name of the output file
+    :param list csvdata: csv data in list form
+    """
+    with open(filename, "w") as f:
+        csvwriter = csv.writer(
+            f, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)
+        for row in csvdata:
+            csvwriter.writerow(row)
+
+
+def remove_unneeded_distros(_csvdata, distros):
+    """remove_unneeded_distros(_csvdata)
+    Return a list that only contains the elements of csvdata that are relevant to the distributions in distros
+
+    :param list _csvdata: csv data in list format
+    :param set distros: set of distribution names
+
+    :return: the cleaned-up set
+    """
+    csvdata = _csvdata.copy()
+    for row in _csvdata:
+        if row[0] == "N" and row[1] not in distros:
+            needed = False
+            i = 8
+            while i < len(row) and not needed:
+                if row[i] in distros:
+                    needed = True
+                i += 3
+            if not needed:
+                csvdata.remove(row)
+        elif row[0] == "C" and (row[2] not in distros or row[4] not in distros):
+            csvdata.remove(row)
+        elif row[0] == "D" and row[1] not in distros:
+            csvdata.remove(row)
+    return csvdata

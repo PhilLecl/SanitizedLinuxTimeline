@@ -1,16 +1,23 @@
 #! /usr/bin/python3
 
-import sys, csv
+import sys, csv, json
 
 
 def argparse():
-    global listfile
-    listfile = sys.argv[1]
-    global csvfile
-    csvfile = sys.argv[2]
+    try:
+        global listfile
+        listfile = sys.argv[1]
+        global csvfile
+        csvfile = sys.argv[2]
+        global rulefile
+        rulefile = sys.argv[3]
+    except:
+        print("Usage: ./make_replacement_json.py LISTFILE CSVFILE OUTPUTFILE")
+        sys.exit(1)
 
 
 def check_existence():
+    d = {}
     for distro in distros:
         found = False
         for row in csvdata:
@@ -25,7 +32,9 @@ def check_existence():
                         break
                     i += 3
         if not found:
-            print(distro + " not found in csv.")
+            d[distro] = ""
+    with open(rulefile, "w") as f:
+        f.write(json.dumps(d, sort_keys=True, indent=4))
 
 
 def read_distros():

@@ -18,9 +18,7 @@ def argparse():
 if __name__ == "__main__":
     argparse()
     distros = read_distros(listfile)
-    with open(csvfile) as f:
-        csvdata = list(csv.reader(f, delimiter=',', quotechar='"'))
-    nonexistent = check_existence(distros, csvdata)
+    nonexistent = check_existence(distros, csvfile)
     ne_dict = {}
     for distro in nonexistent:
         ne_dict[distro] = ""

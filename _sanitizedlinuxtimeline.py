@@ -1,11 +1,17 @@
-def check_existence(distros, csvdata):
-    """check_existence(distros, csvdata)
+import json, csv
+
+def check_existence(distros, csvfile):
+    """check_existence(distros, csvfile)
     Return a set of all distributions that are in distros but not in csvfile
     
     Arguments:
     distros - a set of distributions
-    csvdata - csv data as a list
+    csvfile - csv file 
     """
+
+    with open(csvfile) as f:
+        csvdata = list(csv.reader(f, delimiter=',', quotechar='"'))
+
     s = set() 
     for distro in distros:
         found = False
@@ -38,5 +44,13 @@ def read_distros(listfile):
                 s.add(line.replace("\n", ""))
     return s
 
-
-read_distros("list_100")
+def apply_rules(distros, rulefile):
+    d = distros.copy()
+    with open(rulefile) as f:
+        rules = json.loads(f.read())
+    for distro in distros.copy():
+        if distro in rules.keys():
+            d.remove(distro)
+            if rules[distro] and rules[distro][0] != "#":
+                d.add(rules[distro])
+    return d

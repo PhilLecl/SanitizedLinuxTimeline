@@ -1,6 +1,6 @@
 #! /usr/bin/python3
 
-from sys import argv
+import sys
 import requests
 from bs4 import BeautifulSoup
 
@@ -8,14 +8,15 @@ from bs4 import BeautifulSoup
 def parse_args():
     try:
         global number
-        number = int(argv[1])
+        number = int(sys.argv[1])
         global listfile
-        listfile = argv[2]
+        listfile = sys.argv[2]
         global timeframe
-        timeframe = argv[3] if len(argv) > 3 else 1
+        timeframe = int(sys.argv[3]) if len(sys.argv) > 3 else 1
     except:
         print(
             "Usage: ./scrape_distrowatch.py NUMBER_OF_DISTROS OUTPUT_FILE [TIMEFRAME]")
+        sys.exit(1) 
 
 
 def scrape():

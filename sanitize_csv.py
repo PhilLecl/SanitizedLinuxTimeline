@@ -1,19 +1,23 @@
 #! /usr/bin/python3
 
-from sys import argv
+import sys
 import csv
 from _sanitizedlinuxtimeline import read_distros, add_ancestors, apply_rules
 
 
 def argparse():
-    global listfile
-    listfile = argv[1]
-    global inputcsv
-    inputcsv = argv[2]
-    global rulefile
-    rulefile = argv[3]
-    global outputcsv
-    outputcsv = argv[4]
+    try:
+        global listfile
+        listfile = sys.argv[1]
+        global inputcsv
+        inputcsv = sys.argv[2]
+        global rulefile
+        rulefile = sys.argv[3]
+        global outputcsv
+        outputcsv = sys.argv[4]
+    except:
+        print("Usage: ./sanitize_csv.py LISTFILE INPUTCSV RULEFILE OUTPUTCSV")
+        sys.exit(1)
 
 
 def remove_comments(inputcsv):

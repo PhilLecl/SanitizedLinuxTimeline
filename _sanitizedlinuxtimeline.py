@@ -6,9 +6,10 @@ def check_existence(distros, csvfile):
     """check_existence(distros, csvfile)
     Return a set of all distributions that are in distros but not in csvfile
 
-    Arguments:
-    distros - a set of distributions
-    csvfile - csv file 
+    :param set distros: a set of distributions
+    :param str csvfile: filename of the csv file
+
+    :return: set containing all distributions that are in distros but don't appear in csvfile
     """
 
     with open(csvfile) as f:
@@ -38,6 +39,8 @@ def read_distros(listfile):
     Return a set of all distributions contained in listfile
     with each line being treated as one distribution.
     Lines with a leading '#' are ignored
+
+    :param str listfile: filename of the file containing the list
     """
 
     s = set()
@@ -49,6 +52,13 @@ def read_distros(listfile):
 
 
 def apply_rules(distros, rulefile):
+    """apply_rules(distros, rulefile)
+    Use the rules contained in rulefile to match the spelling of the distributions in distros to the spelling in the csv.
+
+    :param set distros: a set of distribution names
+
+    :return: a set with the rules applied
+    """
     d = distros.copy()
     with open(rulefile) as f:
         rules = json.loads(f.read())
@@ -61,6 +71,14 @@ def apply_rules(distros, rulefile):
 
 
 def add_ancestors(distro, distros, csvdata):
+    """Add the ancestors of distro to distros.
+
+    :param str distro: the distribution whose acestors to add
+    :param set distros: a set of distribution names
+    :param list csvdata: csv data in list format for finding the ancestors
+
+    :returns: A set containing the original distributions as well as the ancestors of distro.
+    """
     d = distros.copy()
     for row in csvdata:
         if row[0] == "N":

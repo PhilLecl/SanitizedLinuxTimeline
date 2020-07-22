@@ -16,6 +16,11 @@ def parse_args():
     except:
         print(
             "Usage: ./scrape_distrowatch.py NUMBER_OF_DISTROS OUTPUT_FILE [TIMEFRAME]")
+        print("""TIMEFRAMES:
+        0 - last year
+        1 - last 6 months
+        2 - last 3 months
+        3 - last mont""")
         sys.exit(1)
 
 

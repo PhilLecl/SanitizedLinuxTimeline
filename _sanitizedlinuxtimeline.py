@@ -64,11 +64,11 @@ def add_ancestors(distro, distros, csvdata):
     d = distros.copy()
     for row in csvdata:
         if row[0] == "N":
-            add = ( row[1] == distro )
+            add = (row[1] == distro)
             i = 8
             while i < len(row) and not add:
-                add = ( row[i] == distro )
-                i+=3
+                add = (row[i] == distro)
+                i += 3
             if add and row[3] and row[3] not in d:
                 d.add(row[3])
                 d = add_ancestors(row[3], d, csvdata)

@@ -36,7 +36,7 @@ def remove_unneeded_distros(_csvdata):
                 i += 3
             if not needed:
                 csvdata.remove(row)
-        elif row[0] == "C" and ( row[2] not in distros or row[4] not in distros):
+        elif row[0] == "C" and (row[2] not in distros or row[4] not in distros):
             csvdata.remove(row)
         elif row[0] == "D" and row[1] not in distros:
             csvdata.remove(row)
@@ -45,9 +45,11 @@ def remove_unneeded_distros(_csvdata):
 
 def write_csv(filename, csvdata):
     with open(filename, "w") as f:
-        csvwriter = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)
+        csvwriter = csv.writer(
+            f, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)
         for row in csvdata:
             csvwriter.writerow(row)
+
 
 if __name__ == "__main__":
     argparse()
@@ -58,7 +60,7 @@ if __name__ == "__main__":
 
     for distro in distros.copy():
         distros = add_ancestors(distro, distros, csvdata)
-   
+
     csvdata = remove_unneeded_distros(csvdata)
-    
+
     write_csv(outputcsv, csvdata)

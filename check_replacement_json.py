@@ -1,7 +1,10 @@
 #! /usr/bin/python3
 
-import sys, csv, json
+import sys
+import csv
+import json
 from _sanitizedlinuxtimeline import read_distros, check_existence, apply_rules
+
 
 def argparse():
     try:
@@ -14,6 +17,7 @@ def argparse():
     except:
         print("Usage: ./check_replacement_json.py LISTFILE CSVFILE OUTPUTFILE")
         sys.exit(1)
+
 
 if __name__ == "__main__":
     argparse()

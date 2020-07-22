@@ -2,6 +2,7 @@
 
 from sys import argv
 import csv
+from _sanitizedlinuxtimeline import read_distros
 
 
 def argparse():
@@ -9,15 +10,6 @@ def argparse():
     listfile = argv[1]
     global csvfile
     csvfile = argv[2]
-
-
-def read_distros():
-    l = set()
-    with open(listfile) as f:
-        for line in f:
-            if line[0] != "#":
-                l.add(line.replace("\n", ""))
-    return l
 
 
 def add_ancestors(distro):
@@ -53,7 +45,7 @@ def print_csv():
 if __name__ == "__main__":
     argparse()
 
-    distros = read_distros()
+    distros = read_distros(listfile)
 
     with open(csvfile) as f:
         csvdata = list(csv.reader(f, delimiter=',', quotechar='"'))

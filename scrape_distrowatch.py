@@ -16,7 +16,7 @@ def parse_args():
     except:
         print(
             "Usage: ./scrape_distrowatch.py NUMBER_OF_DISTROS OUTPUT_FILE [TIMEFRAME]")
-        sys.exit(1) 
+        sys.exit(1)
 
 
 def scrape():

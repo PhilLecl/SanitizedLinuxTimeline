@@ -50,24 +50,6 @@ def print_csv():
         print(row)
 
 
-def check_existence():
-    for distro in distros:
-        found = False
-        for row in csvdata:
-            if row[0] == "N":
-                if row[1] == distro:
-                    found = True
-                    break
-            i = 8
-            while i < len(row):
-                if row[i] == distro:
-                    found = True
-                    break
-                i += 3
-        if not found:
-            print(distro + " not found in csv.")
-
-
 if __name__ == "__main__":
     argparse()
 

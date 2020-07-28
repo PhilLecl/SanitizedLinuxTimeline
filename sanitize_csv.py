@@ -29,7 +29,9 @@ if __name__ == "__main__":
 
     for distro in distros.copy():
         distros = add_ancestors(distro, distros, csvdata)
-
+    
+    print(len(distros))
+    print(distros)
     csvdata = remove_unneeded_distros(csvdata, distros)
 
     write_csv(outputcsv, csvdata)

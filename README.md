@@ -6,6 +6,7 @@ This project contains python scripts for reducing the [Linux Distribution Timeli
 - git
 - gnuclad
 - Python3
+- BeautifulSoup4
 
 ## Setup
     git clone https://github.com/PhilLecl/SanitizedLinuxTimeline

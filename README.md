@@ -25,9 +25,9 @@ Possible timeframes are:
 
 Generate a csv for gnuclad using LISTFILE and write it to CSVFILE (in linuxtimeline/):
 
-    ./sanitize_csv LISTFILE linuxtimeline/gldt.csv replacements.json linuxtimeline/CSVFILE
+    ./sanitize_csv LISTFILE linuxtimeline/ldt.csv replacements.json linuxtimeline/CSVFILE
 
 Generate the image using gnuclad and write it to SVGFILE:
 
     cd linuxtimeline
-    gnuclad CSVFILE SVGFILE gldt.conf
+    gnuclad CSVFILE SVGFILE ldt.conf

@@ -9,8 +9,7 @@ This project contains python scripts for reducing the [Linux Distribution Timeli
 - BeautifulSoup4
 
 ## Setup
-    git clone https://github.com/PhilLecl/SanitizedLinuxTimeline
-    git submodule init && git submodule update
+    git clone --recursive https://github.com/PhilLecl/SanitizedLinuxTimeline
 
 ## Usage
 Generate a list containing the top NUM distros on Distrowatch and write it to LISTFILE:
